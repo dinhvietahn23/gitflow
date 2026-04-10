@@ -1,0 +1,19 @@
+name: "Deploy to K8S Dev"
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+    types: [closed]
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: echo "docker build -t myapp:latest ."
+      - name: Push image to registry
+        run: echo "docker push myapp:latest"
+      - name: Deploy to Kubernetes
+        run: echo "kubectl apply -f k8s/deployment.yaml"

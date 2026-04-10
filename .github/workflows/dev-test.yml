@@ -1,0 +1,20 @@
+name: "Testing"
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 3.1.0
+      - name: Restore dependencies
+        run: echo "dotnet restore"
+      - name: Run Testing
+        run: echo "dotnet test --no-build --verbosity normal"
