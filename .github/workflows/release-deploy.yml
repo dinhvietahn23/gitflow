@@ -1,0 +1,17 @@
+name: "Deploy to K8S Staging"
+
+on:
+  push:
+    branches: [ "release/v*" ]
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: echo "docker build -t myapp:latest ."
+      - name: Push image to registry
+        run: echo "docker push myapp:latest"
+      - name: Deploy to Kubernetes
+        run: echo "kubectl apply -f k8s/deployment.yaml"
