@@ -15,5 +15,11 @@ jobs:
         run: echo "docker build -t myapp:latest ."
       - name: Push image to registry
         run: echo "docker push myapp:latest"
+      - name: Debug branch
+        run: |
+          echo "GITHUB_REF=$GITHUB_REF"
+          echo "GITHUB_SHA=$GITHUB_SHA"
+          git branch
+          git log -1 --oneline
       - name: Deploy to Kubernetes
         run: echo "kubectl apply -f k8s/deployment.yaml"
