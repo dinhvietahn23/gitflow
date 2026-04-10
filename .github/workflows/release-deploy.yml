@@ -2,8 +2,7 @@ name: "Deploy to K8S Staging"
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ]	
+    branches: [ "release/v*" ]
 
 jobs:
   cicd:
